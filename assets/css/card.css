@@ -1,0 +1,72 @@
+a {
+  color: #f96332;
+}
+.m-t-5 {
+  margin-top: 5px;
+}
+.card {
+  background: #fff;
+  margin-bottom: 30px;
+  transition: 0.5s;
+  border: 0;
+  border-radius: 0.1875rem;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+.card .body {
+  font-size: 14px;
+  color: #424242;
+  padding: 20px;
+  font-weight: 400;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border-radius: 2px;
+}
+.profile-page {
+  padding: 3rem;
+  min-height: 90vh;
+}
+.profile-page .profile-header {
+  position: relative;
+}
+
+.profile-page .profile-header .profile-image img {
+  border-radius: 10%;
+  max-width: 140px;
+  max-height: 140px;
+  border: 3px solid #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.profile-page .profile-header .social-icon a {
+  margin: 0 5px;
+}
+
+.profile-page .profile-sub-header {
+  min-height: 60px;
+  width: 100%;
+}
+
+.profile-page .profile-sub-header ul.box-list {
+  display: inline-table;
+  table-layout: fixed;
+  width: 100%;
+  background: #eee;
+}
+
+.profile-page .profile-sub-header ul.box-list li {
+  border-right: 1px solid #e0e0e0;
+  display: table-cell;
+  list-style: none;
+}
+
+.profile-page .profile-sub-header ul.box-list li:last-child {
+  border-right: none;
+}
+
+.profile-page .profile-sub-header ul.box-list li a {
+  display: block;
+  padding: 15px 0;
+  color: #424242;
+}
