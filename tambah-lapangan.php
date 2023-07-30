@@ -41,10 +41,10 @@ if (isset($_SESSION['username'])) {
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-         
+
 
                 <form action="" method="post" enctype="multipart/form-data" style="width: 95%; margin-left: 40px; min-height:900px">
-                <h2 style="text-align: center;"> Tambah Data Lapangan</h2>
+                    <h2 style="text-align: center;"> Tambah lapangan</h2>
 
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama Lapangan</label>
@@ -53,25 +53,25 @@ if (isset($_SESSION['username'])) {
 
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
-                        <select id="status" name="status"  class="form-control">
-                           <option value="">--pilih---</option>
-                           <option value="1">Aktif</option>
-                           <option value="0">Dalam Perawatan</option>
+                        <select id="status" name="status" class="form-control">
+                            <option value="">--pilih---</option>
+                            <option value="1">Aktif</option>
+                            <option value="0">Dalam Perawatan</option>
                         </select>
-                   </div>
+                    </div>
 
                     <div class="mb-3">
                         <label for="tipe" class="form-label">Tipe Lapangan</label>
                         <select id="tipe" name="tipe" class="form-control">
-                           <option value="">--pilih---</option>
-                           <option value="Futsal">Futsal</option>
-                           <option value="Badminton">Badminton</option>
+                            <option value="">--pilih---</option>
+                            <option value="Futsal">Futsal</option>
+                            <option value="Badminton">Badminton</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="fasilitas" class="form-label">Fasilitas</label>
-                        <textarea type="text"  rows="5" class="form-control" id="fasilitas" name="fasilitas" placeholder="Fasilitas ..." required></textarea>
+                        <textarea type="text" rows="5" class="form-control" id="fasilitas" name="fasilitas" placeholder="Fasilitas ..." required></textarea>
                     </div>
 
 
@@ -99,7 +99,7 @@ if (isset($_SESSION['username'])) {
 
     <script>
         // preview image
-    
+
         function previewImg() {
             const gambar = document.querySelector('#gambar');
             const imgPreview = document.querySelector('.img-preview');
@@ -111,7 +111,6 @@ if (isset($_SESSION['username'])) {
                 imgPreview.src = e.target.result;
             }
         }
-
     </script>
 
 

@@ -24,13 +24,13 @@ if (isset($_SESSION['username'])) {
     </div>
     <!-- /.content-header -->
 
-<?php
+  <?php
 
 } else {
-    header("Location: login-template.php");
-    exit();
+  header("Location: login-admin.php");
+  exit();
 }
 
 include 'layout/footer-admin.php';
 
-?>
+  ?>

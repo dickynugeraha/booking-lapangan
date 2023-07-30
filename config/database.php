@@ -1,6 +1,3 @@
 <?php
 
-$db = mysqli_connect('localhost', 'root', '', 'gor');
-
-
-?>
+$db = mysqli_connect('localhost', 'root', '', 'info_lapangan');

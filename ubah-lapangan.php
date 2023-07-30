@@ -8,7 +8,7 @@ if (isset($_SESSION['username'])) {
 
     $id = (int)$_GET['id'];
 
-    $field = select("SELECT * FROM fields WHERE id = $id")[0];
+    $field = select("SELECT * FROM lapangan WHERE id = $id")[0];
 
     // cek apakah tombol tambah ditekan
     if (isset($_POST['ubah-lapangan'])) {
@@ -28,7 +28,7 @@ if (isset($_SESSION['username'])) {
 
 ?>
 
-   
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -46,11 +46,11 @@ if (isset($_SESSION['username'])) {
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-         
+
 
                 <form action="" method="post" enctype="multipart/form-data" style="width: 95%; margin-left: 40px; min-height:900px">
-                <h2 class="text-center">Ubah Data Lapangan</h2>
-                     <input type="hidden" name="id" value="<?= $field['id']; ?>">
+                    <h2 class="text-center">Ubah Data Lapangan</h2>
+                    <input type="hidden" name="id" value="<?= $field['id']; ?>">
                     <input type="hidden" name="gambarLama" value="<?= $field['photo']; ?>">
 
 
@@ -61,25 +61,25 @@ if (isset($_SESSION['username'])) {
 
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
-                        <select id="status" name="status"  class="form-control">
-                           <option value="">--pilih---</option>
-                           <option <?= $field['status'] == "1" ? "selected" : ""; ?> value="1">Aktif</option>
-                           <option <?= $field['status'] == "0" ? "selected" : ""; ?> value="0">Dalam Perawatan</option>
+                        <select id="status" name="status" class="form-control">
+                            <option value="">--pilih---</option>
+                            <option <?= $field['status'] == "1" ? "selected" : ""; ?> value="1">Aktif</option>
+                            <option <?= $field['status'] == "0" ? "selected" : ""; ?> value="0">Dalam Perawatan</option>
                         </select>
-                   </div>
+                    </div>
 
                     <div class="mb-3">
                         <label for="tipe" class="form-label">Tipe Lapangan</label>
                         <select id="tipe" name="tipe" class="form-control">
-                           <option value="">--pilih---</option>
-                           <option <?= $field['type'] === "Futsal" ? "selected" : ""; ?> value="Futsal">Futsal</option>
-                           <option <?= $field['type'] === "Badminton" ? "selected" : ""; ?>  value="Badminton">Badminton</option>
+                            <option value="">--pilih---</option>
+                            <option <?= $field['type'] === "Futsal" ? "selected" : ""; ?> value="Futsal">Futsal</option>
+                            <option <?= $field['type'] === "Badminton" ? "selected" : ""; ?> value="Badminton">Badminton</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="fasilitas" class="form-label">Fasilitas</label>
-                        <textarea type="text"  rows="5" class="form-control" id="fasilitas" name="fasilitas" placeholder="Fasilitas ..." required> <?= $field['facility']; ?></textarea>
+                        <textarea type="text" rows="5" class="form-control" id="fasilitas" name="fasilitas" placeholder="Fasilitas ..." required> <?= $field['facility']; ?></textarea>
                     </div>
 
 
@@ -107,7 +107,7 @@ if (isset($_SESSION['username'])) {
 
     <script>
         // preview image
-    
+
         function previewImg() {
             const gambar = document.querySelector('#gambar');
             const imgPreview = document.querySelector('.img-preview');
@@ -119,7 +119,6 @@ if (isset($_SESSION['username'])) {
                 imgPreview.src = e.target.result;
             }
         }
-
     </script>
 
 

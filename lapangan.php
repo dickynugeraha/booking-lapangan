@@ -6,7 +6,7 @@ include 'layout/header-admin.php';
 // membatasi halaman sebelum login
 if (isset($_SESSION['username'])) {
 
-    $fields = select("SELECT * FROM fields ORDER BY id DESC");
+    $fields = select("SELECT * FROM lapangan ORDER BY id DESC");
 ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -30,9 +30,6 @@ if (isset($_SESSION['username'])) {
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-
-
-
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
@@ -44,7 +41,7 @@ if (isset($_SESSION['username'])) {
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
-                                    <a href="tambah-lapangan.php" class="btn btn-primary btn-small mb-2"> <i class="fas fa-plus"></i> Tambah</a>
+                                        <a href="tambah-lapangan.php" class="btn btn-primary btn-small mb-2"> <i class="fas fa-plus"></i> Tambah</a>
                                         <table id="dataTable" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>

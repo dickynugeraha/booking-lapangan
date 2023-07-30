@@ -24,7 +24,8 @@ function validate($data)
     $data = htmlspecialchars($data);
     return $data;
 }
-function loginAdmin($post){
+function loginAdmin($post)
+{
     // panggil koneksi database
     global $db;
     $username = $post["username"];
@@ -61,88 +62,10 @@ function loginAdmin($post){
     }
 }
 
-function loginUser($post){
-    global $db;
-    $phone = $post["phone"];
-    $password = $post["password"];
-
-    $query = "SELECT * FROM users WHERE phone='$phone'";
-
-        $result = mysqli_query($db, $query);
-
-        if (mysqli_num_rows($result) === 1) {
-            $row = mysqli_fetch_assoc($result);
-
-            $verifyPassword = password_verify($password,$row["password"] );
-            if (!$verifyPassword){
-                echo "<script>
-                alert('Salah Password, silahkan input kembali!');
-                document.location.href = 'login-user.php';
-                </script>";
-                exit();
-                return;
-            }
-        } else {
-            echo "<script>
-                alert('User tidak tersedia, silahkan register!');
-                document.location.href = 'login-user.php';
-                </script>";
-                exit();
-                return;
-        }
-        $_SESSION['phone'] = $row['phone'];
-        $_SESSION['userId'] = $row['id'];
-        echo "<script>
-        alert('Login berhasil!');
-        document.location.href = 'lapangan-tersedia.php';
-        </script>";
-        exit();
-        return;
-
-}
-
-function registerUser($post){
-    global $db;
-    $name = $post["name"];
-    $phone = $post["phone"];
-    $email = $post["email"];
-    $address = $post["address"];
-    $password = $post["password"];
-    $confirmPassword = $post["confirm-password"];
-
-    $query = "SELECT * FROM users WHERE phone='$phone' OR email='$email'";
-    $user = mysqli_query($db, $query);
-    
-    if (mysqli_num_rows($user) >= 1){
-        echo "<script>
-        alert('Nomor Hp atau email sudah terpakai!');
-        document.location.href = 'login-user.php';
-        </script>";
-        exit();
-        return;
-    }
-     if ($password !== $confirmPassword){
-        echo "<script>
-        alert('Konfirm password tidak sama!');
-        document.location.href = 'login-user.php';
-        </script>";
-        exit();
-        return;
-    }
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-    $query = "INSERT INTO users (id, name, phone, address, email, password) VALUES(null, '$name', '$phone', '$address', '$email', '$passwordHash')";
-    mysqli_query($db, $query);
-    echo "<script>
-        alert('Register berhasil, silahkan login untuk melakukan booking!');
-        document.location.href = 'login-user.php';
-        </script>";
-        exit();
-        return;
-}
 
 // ------------------------------------- FUNGSI LAPANGAN --------------------------------------------
-function createLapangan($post){
+function createLapangan($post)
+{
     global $db;
 
     $nama_lapangan = $post['nama'];
@@ -150,7 +73,7 @@ function createLapangan($post){
     $tipe = $post['tipe'];
     $fasilitas = $post['fasilitas'];
     $harga_lapangan = $post['harga'];
-  
+
     $gambar = upload_file("lapangan");
 
     //cek upload file
@@ -159,7 +82,7 @@ function createLapangan($post){
     }
 
     //query tambah data
-    $query = "INSERT INTO fields VALUES
+    $query = "INSERT INTO lapangan VALUES
     (null,
     '$status',
     '$tipe',
@@ -172,7 +95,8 @@ function createLapangan($post){
 
     return mysqli_affected_rows($db);
 }
-function updateLapangan($post){
+function updateLapangan($post)
+{
     global $db;
 
     $id = $post['id'];
@@ -188,17 +112,17 @@ function updateLapangan($post){
         $gambar = $gambarLama;
     } else {
         //ambil gambar sesuai gambar yang dipilih
-        $field = select("SELECT * FROM fields WHERE id = $id")[0];
+        $field = select("SELECT * FROM lapangan WHERE id = $id")[0];
         $gambar_img = $field["photo"];
-        
+
         $gambar = upload_file("lapangan");
 
         unlink("assets/img/lapangan/" . $gambar_img);
     }
 
-    
+
     //query tambah data
-    $query = "UPDATE fields SET
+    $query = "UPDATE lapangan SET
     name = '$nama_lapangan',
     status = '$status',
     type = '$tipe',
@@ -210,100 +134,22 @@ function updateLapangan($post){
     mysqli_query($db, $query);
 
     return mysqli_affected_rows($db);
-
 }
 function deleteLapangan($id)
 {
     global $db;
 
     //ambil gambar sesuai gambar yang dipilih
-    $field = select("SELECT * FROM fields WHERE id = $id")[0];
+    $field = select("SELECT * FROM lapangan WHERE id = $id")[0];
     unlink("assets/img/lapangan/" . $field['photo']);
 
     // query hapus data barang
-    $query = "DELETE FROM fields WHERE id = $id";
-
-    mysqli_query($db, $query);
-
-    return mysqli_affected_rows($db);
-
-}
-
-// --------------------------------------- FUNGSI BOOKING ------------------------------------------
-function createBooking($post){
-    global $db;
-    $fieldId = $post["fieldId"];
-    $userId = $post["userId"];
-    $booking_start = $post["booking_start"];
-    $booking_end = $post["booking_end"];
-    $booking_count = $post["booking_count"];
-    $total_transfer = $post["total_transfer"];
-    
-    date_default_timezone_set('Asia/Jakarta');
-    $now = date("Y-m-d h:i:s");
-
-    $sql = "SELECT booking_start, booking_end FROM bookings WHERE status = 'valid' OR status = 'process' AND (field_id = $fieldId)";
-
-    $listBooking = select($sql);
-
-    $isAvailableBook = false;
-    foreach ($listBooking as $book) {
-       if (strtotime($book["booking_start"]) < strtotime($booking_start)){
-            if ( strtotime($booking_start) < strtotime($book["booking_end"])){
-                $isAvailableBook = true;
-            }
-       }
-    }
-
-    if ($isAvailableBook){
-        echo "<script>
-                alert('Lapangan sudah diboking, Silahkan pilih jam lain!');
-                document.location.href = 'lapangan-booking.php?fieldId=".$fieldId."';
-                </script>";
-                exit();
-                return;
-    } else {
-        $gambar = upload_file("bukti-transfer");
-        $sql = "INSERT INTO bookings
-        (id, user_id, field_id, booking_start, booking_end, transfer_photo, created_at, booking_count, total_transfer) VALUES
-        (null, '$userId', '$fieldId', '$booking_start', '$booking_end', '$gambar', '$now', $booking_count, $total_transfer)";
-        mysqli_query($db, $sql);
-
-        if(mysqli_affected_rows($db) >= 1){
-            echo "<script>
-            alert('Booking berhasil, lihat status booking di riwayat!');
-            document.location.href = 'transaksi-riwayat.php';
-            </script>";
-            exit();
-            return;
-        } else {
-            echo "<script>
-            alert('Booking gagal!');
-            document.location.href = 'transaksi-riwayat.php';
-            </script>";
-            exit();
-            return;
-        }
-    }
-}
-
-function updateStatusBooking($post){
-    global $db;
-
-    $bookingId = $post["bookingId"];
-    $status = $post["status"];
-    $desc = $post["desc"];
-
-    $query = "UPDATE bookings SET
-    status = '$status',
-    description_status = '$desc'
-    WHERE id = $bookingId";
+    $query = "DELETE FROM lapangan WHERE id = $id";
 
     mysqli_query($db, $query);
 
     return mysqli_affected_rows($db);
 }
-
 
 // fungsi mengupload file 
 function upload_file($location)
@@ -347,7 +193,7 @@ function upload_file($location)
     $namaFileBaru .= $extensifile;
 
     //pindahkan ke folder local 
-    move_uploaded_file($tmpName, 'assets/img/'. $location .'/' . $namaFileBaru);
+    move_uploaded_file($tmpName, 'assets/img/' . $location . '/' . $namaFileBaru);
 
     return $namaFileBaru;
 }

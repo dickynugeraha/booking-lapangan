@@ -35,7 +35,7 @@ ob_start();
 
     <link rel="icon" href="assets/img/logo.jpg">
 
-    
+
     <!-- DataTables -->
     <link rel="stylesheet" href="assets-template/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="assets-template/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -64,7 +64,7 @@ ob_start();
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-          
+
 
             <!-- Sidebar -->
             <div class="sidebar">
@@ -82,47 +82,11 @@ ob_start();
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-
-                        <li class="nav-item">
-                            <a href="pengguna.php" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>
-                                    Pengguna
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a href="lapangan.php" class="nav-link">
                                 <i class="nav-icon fas fa-flag"></i>
                                 <p>
                                     Lapangan
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="pesanan-ditolak.php" class="nav-link">
-                                <i class="nav-icon fas fa-solid fa-ban"></i>
-                                <p>
-                                    Pesanan Ditolak
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="pesanan-diproses.php" class="nav-link">
-                                <i><img src="assets/img/icon-waiting.svg" style="height: 25px; width: 25px; margin-right:5px"></i>
-                                <p>
-                                    Pesanan Diproses
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="pesanan-selesai.php" class="nav-link">
-                                <i><img src="assets/img/icon-acc.svg" style="height: 25px; width: 25px;  margin-right:5px"></i>
-                                <p>
-                                    Pesanan Selesai
                                 </p>
                             </a>
                         </li>
